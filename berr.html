@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Judul Tab Browser Diperbarui -->
+    <title>BERRSTORE - Joki Map Tercepat dan Terpercaya</title>
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #f39c12; /* Warna Orange Taktis */
+            --primary-hover: #d68910;
+            --bg-dark: #0f1014;
+            --bg-card: #1b1e26;
+            --bg-input: #252830;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --border: #333a45;
+            --success: #2ecc71;
+            --whatsapp: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-center { text-align: center; }
+        .text-primary { color: var(--primary); }
+        .font-gaming { font-family: 'Rajdhani', sans-serif; font-weight: 700; }
+        .hidden { display: none; }
+
+        /* Header */
+        header {
+            background-color: rgba(15, 16, 20, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--primary); }
+
+        /* Styling untuk kumpulan link di header (WA & Telegram) */
+        .header-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .header-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s;
+        }
+
+        .header-links a:hover {
+            color: #fff;
+        }
+
+        /* Main Content Card */
+        .order-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 30px;
+            margin-top: 40px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Small Title Replacement */
+        .page-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        /* Tab Navigation (BARU) */
+        .tab-nav {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        /* Section Styles */
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid var(--primary);
+            padding-left: 10px;
+        }
+
+        .form-group { margin-bottom: 25px; }
+
+        /* Map Grid */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .map-item {
+            background-color: var(--bg-input);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .map-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(243, 156, 18, 0.5);
+        }
+
+        .map-item.active {
+            border-color: var(--primary);
+            background-color: rgba(243, 156, 18, 0.1);
+        }
+
+        .map-item.active::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .map-img {
+            height: 120px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .map-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .map-name {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .map-difficulty {
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: inline-block;
+            background: #333;
+            color: #ccc;
+        }
+
+        .map-difficulty.hard { background: #c0392b; color: white; }
+        .map-difficulty.normal { background: #2980b9; color: white; }
+
+        .map-price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Input Styling (Untuk Alloy/Assets/Map Quantity) */
+        .quantity-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            background-color: var(--bg-input);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .quantity-wrapper input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            width: 100%;
+            font-family: 'Rajdhani', sans-serif;
+            outline: none;
+        }
+
+        .quantity-wrapper span {
+            color: var(--text-muted);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* Payment Method */
+        .payment-method {
+            background-color: var(--bg-input);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        
+        .payment-method.active {
+            border-color: var(--primary);
+            background-color: rgba(243, 156, 18, 0.1);
+        }
+
+        .payment-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: bold;
+        }
+
+        .qris-logo {
+            background: white;
+            color: #d12d2d;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 900;
+            font-style: italic;
+        }
+
+        /* Order Button */
+        .btn-order {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .btn-order:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-order:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+
+        /* Tombol WhatsApp Khusus */
+        .btn-wa {
+            background-color: var(--whatsapp);
+            color: white;
+        }
+        .btn-wa:hover {
+            background-color: #128C7E;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+        }
+
+        /* Modal / Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            width: 90%;
+            max-width: 400px;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .qris-display {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: inline-block;
+        }
+
+        .qris-display img {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .order-summary {
+            background: var(--bg-input);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        
+        .order-summary div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .total-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            border-top: 1px dashed #555;
+            padding-top: 10px;
+            margin-top: 5px;
+        }
+
+        /* Loader */
+        .loader {
+            border: 4px solid var(--bg-input);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .page-title { font-size: 1.5rem; }
+            .header-links { gap: 10px; }
+            .header-links span { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo font-gaming">
+                <i class="fa-solid fa-crosshairs"></i> BERRSTORE
+            </div>
+            <!-- Menu Header: WA & Telegram -->
+            <nav class="header-links">
+                <a href="https://wa.me/6285975416019?text=Halo%20Admin%2C%20saya%20mau%20order%20joki%20Delta%20Force" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> <span>Admin</span>
+                </a>
+                <a href="https://t.me/berrstore" target="_blank">
+                    <i class="fa-brands fa-telegram"></i> <span>Telegram</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Judul Kecil Pengganti Banner -->
+    <div class="container">
+        <h1 class="page-title font-gaming">JOKI MAP TERCEPAT DAN TERPERCAYA</h1>
+    </div>
+
+    <!-- Main Order Section -->
+    <main class="container">
+        <div class="order-card">
+            
+            <!-- Tab Navigasi -->
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="switchTab('joki', this)">Joki Map</button>
+                <button class="tab-btn" onclick="switchTab('alloy', this)">Alloy</button>
+                <button class="tab-btn" onclick="switchTab('assets', this)">Assets</button>
+            </div>
+  
+            <!-- KONTEN 1: JOKI MAP -->
+            <div id="content-joki" class="tab-content">
+                <div class="form-group">
+                    <div class="section-title font-gaming">
+                        <i class="fa-solid fa-map-location-dot"></i> PILIH MAP
+                    </div>
+                    <div class="map-grid" id="mapGrid">
+                        
+                        <!-- Zero Dam Normal -->
+                        <div class="map-item" onclick="selectMap(this, 'Zero Dam Normal', 20000)">
+                            <img src="https://z-cdn-media.chatglm.cn/files/384bde73-318c-4a98-a5e8-b32010f77766.jpg?auth_key=1881102000-10fa04efd87b4220a84680f0342b9638-0-de3a7a9bcdb5d4f87d7607d14cf1a0c0" alt="Zero Dam" class="map-img">
+                            <div class="map-info">
+                                <span class="map-name">Zero Dam</span>
+                                <span class="map-difficulty normal">Normal</span>
+                                <div class="map-price">Rp 20.000</div>
+                            </div>
+                        </div>
+
+                        <!-- Brakkesh Normal -->
+                        <div class="map-item" onclick="selectMap(this, 'Brakkesh Normal', 25000)">
+                            <img src="https://z-cdn-media.chatglm.cn/files/67254a73-9417-4b4a-80c2-33b768304d68.jpg?auth_key=1881106745-6bda31df3c684e3cb4da93cc9fbe872e-0-8c2fab40ea92a490c5766a699ee0e72e" alt="Brakkesh" class="map-img">
+                            <div class="map-info">
+                                <span class="map-name">Brakkesh</span>
+                                <span class="map-difficulty normal">Normal</span>
+                                <div class="map-price">Rp 25.000</div>
+                            </div>
+                        </div>
+
+                        <!-- Space City Normal -->
+                        <div class="map-item" onclick="selectMap(this, 'Space City Normal', 30000)">
+                            <img src="https://z-cdn-media.chatglm.cn/files/35394af1-2cd9-4882-8842-47afeab989c9.jpg?auth_key=1881101176-ba5d3d6084bf453eadeaff0ff6f3ee01-0-b80db321cc0998397eba54307d553d22" alt="Space City Normal" class="map-img">
+                            <div class="map-info">
+                                <span class="map-name">Space City</span>
+                                <span class="map-difficulty normal">Normal</span>
+                                <div class="map-price">Rp 30.000</div>
+                            </div>
+                        </div>
+
+                        <!-- Space City Hard -->
+                        <div class="map-item" onclick="selectMap(this, 'Space City Hard', 60000)">
+                            <img src="https://z-cdn-media.chatglm.cn/files/35394af1-2cd9-4882-8842-47afeab989c9.jpg?auth_key=1881101176-ba5d3d6084bf453eadeaff0ff6f3ee01-0-b80db321cc0998397eba54307d553d22" alt="Space City Hard" class="map-img">
+                            <div class="map-info">
+                                <span class="map-name">Space City</span>
+                                <span class="map-difficulty hard">Hard</span>
+                                <div class="map-price">Rp 60.000</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" id="selectedMapName">
+                    <input type="hidden" id="selectedMapPrice">
+                </div>
+
+                <!-- BARU: Jumlah Order Map -->
+                <div class="form-group">
+                    <div class="section-title font-gaming">
+                        <i class="fa-solid fa-layer-group"></i> JUMLAH ORDER
+                    </div>
+                    <div class="quantity-wrapper">
+                        <input type="number" id="mapOrderQty" value="1" min="1" oninput="updateMapTotal()">
+                        <span>MATCH</span>
+                    </div>
+                    <div style="margin-top: 5px; text-align: right; font-size: 0.9rem; color: var(--text-muted);">
+                        Total Estimasi: <span id="mapTotalDisplay" style="color: var(--primary); font-weight: bold; font-size: 1.1rem;">Rp 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KONTEN 2: ALLOY -->
+            <div id="content-alloy" class="tab-content hidden">
+                <div class="form-group">
+                    <div class="section-title font-gaming">
+                        <i class="fa-solid fa-cube"></i> INPUT ALLOY
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 0.9rem;">Rp 9.000 per 1M Alloy. Masukkan jumlah kelipatan 1 (1, 2, 3, dst).</p>
+                    
+                    <div class="quantity-wrapper">
+                        <input type="number" id="alloyAmount" placeholder="0" min="1" step="1" oninput="calculateAlloy()">
+                        <span>M ALLOY</span>
+                    </div>
+                    <div style="margin-top: 10px; text-align: right; font-size: 1.2rem; color: var(--primary);">
+                        Total: <span id="alloyTotal">Rp 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KONTEN 3: ASSETS (Update Harga & Satuan) -->
+            <div id="content-assets" class="tab-content hidden">
+                <div class="form-group">
+                    <div class="section-title font-gaming">
+                        <i class="fa-solid fa-coins"></i> INPUT ASSETS (VALUE)
+                    </div>
+                    <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 0.9rem;">Rp 8.000 per 1M VALUE. Masukkan jumlah kelipatan 1 (1, 2, 3, dst).</p>
+                    
+                    <div class="quantity-wrapper">
+                        <input type="number" id="assetsAmount" placeholder="0" min="1" step="1" oninput="calculateAssets()">
+                        <span>M VALUE</span>
+                    </div>
+                    <div style="margin-top: 10px; text-align: right; font-size: 1.2rem; color: var(--primary);">
+                        Total: <span id="assetsTotal">Rp 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Pembayaran -->
+            <div class="form-group">
+                <div class="section-title font-gaming">
+                    <i class="fa-solid fa-wallet"></i> METODE PEMBAYARAN
+                </div>
+                
+                <div class="payment-method active" id="qrisMethod">
+                    <div class="payment-label">
+                        <span class="qris-logo">QRIS</span>
+                        <span>Instant Payment (OVO, GoPay, Dana, dll)</span>
+                    </div>
+                    <i class="fa-solid fa-check-circle text-primary"></i>
+                </div>
+            </div>
+
+            <!-- 3. Tombol Order -->
+            <button class="btn-order font-gaming" onclick="processOrder()">
+                <i class="fa-solid fa-cart-shopping"></i> BELI SEKARANG
+            </button>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 BERRSTORE. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.6;">Website tidak berafiliasi resmi dengan Delta Force Mobile.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Pembayaran -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h3 class="font-gaming" style="color: var(--primary);">SCAN QRIS</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Silakan scan QRIS di bawah ini untuk membayar</p>
+            
+            <div class="order-summary">
+                <div><span>Item:</span> <span id="summaryItem" style="color: white;">-</span></div>
+                <div class="total-price">
+                    <span>Total:</span> <span id="summaryPrice">Rp 0</span>
+                </div>
+            </div>
+
+            <div class="qris-display">
+                <img src="https://z-cdn-media.chatglm.cn/files/76643e4c-5710-4f96-bd67-89a442e041a1.jpeg?auth_key=1881105338-81e17031736f450cb52bed634cf093f2-0-75cd19119d47b06256af54ca3cd387c0" alt="QRIS Code BERRSTORE">
+            </div>
+
+            <p style="font-size: 0.8rem; color: #f39c12; margin-bottom: 15px;">
+                <i class="fa-solid fa-paper-plane"></i> Wajib kirim bukti pembayaran kepada admin
+            </p>
+
+            <button class="btn-order" id="checkPaymentBtn" onclick="simulateCheck()">
+                <div class="loader" id="btnLoader"></div>
+                <span id="btnText">Saya Sudah Bayar</span>
+            </button>
+            
+            <!-- BARU: Tombol Kirim Order ke WhatsApp -->
+            <a id="waConfirmBtn" href="#" target="_blank" class="btn-order btn-wa font-gaming" style="margin-top: 10px; text-decoration: none; display: none;">
+                <i class="fa-brands fa-whatsapp"></i> Kirim Bukti Pembayaran
+            </a>
+        </div>
+    </div>
+
+    <!-- Success Modal (Hidden by default) -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content" style="text-align: center;">
+            <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: var(--success); margin-bottom: 15px;"></i>
+            <h3 class="font-gaming">PEMBAYARAN BERHASIL!</h3>
+            <p>Orderan Anda sedang diproses oleh tim BERRSTORE. Silakan tunggu invite game atau hubungi admin.</p>
+            <button class="btn-order" style="margin-top: 20px;" onclick="window.location.reload()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // KONFIGURASI HARGA
+        const PRICE_PER_ALLOY = 9000;   // Rp 9.000 per 1M Alloy
+        const PRICE_PER_ASSET = 8000;   // Rp 8.000 per 1M VALUE
+        const ADMIN_WA = "6285975416019"; // Nomor Admin Anda
+
+        let currentTab = 'joki';
+        let currentMap = null;
+        let currentPrice = 0;
+        let currentOrderName = '';
+        let finalOrderPrice = 0;
+
+        // Fungsi Ganti Tab
+        function switchTab(tabName, element) {
+            currentTab = tabName;
+            
+            // Reset Selection Map jika pindah tab
+            if(tabName !== 'joki') {
+                currentMap = null;
+                currentPrice = 0;
+                document.querySelectorAll('.map-item').forEach(item => item.classList.remove('active'));
+                document.getElementById('mapTotalDisplay').innerText = formatRupiah(0);
+            }
+
+            // Update Tab UI
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            // Tampilkan Konten
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+        }
+
+        // Fungsi Update Total Map (Baru)
+        function updateMapTotal() {
+            if (!currentMap || currentPrice === 0) return;
+
+            const qty = parseInt(document.getElementById('mapOrderQty').value) || 1;
+            const total = currentPrice * qty;
+            document.getElementById('mapTotalDisplay').innerText = formatRupiah(total);
+        }
+
+        // Fungsi Hitung Total Alloy
+        function calculateAlloy() {
+            const input = document.getElementById('alloyAmount');
+            let amount = parseInt(input.value);
+            
+            if (!amount || amount < 1) {
+                amount = 0;
+            } else {
+                input.value = amount; 
+            }
+
+            const total = amount * PRICE_PER_ALLOY;
+            document.getElementById('alloyTotal').innerText = formatRupiah(total);
+            return total;
+        }
+
+        // Fungsi Hitung Total Assets
+        function calculateAssets() {
+            const input = document.getElementById('assetsAmount');
+            let amount = parseInt(input.value);
+            
+            if (!amount || amount < 1) {
+                amount = 0;
+            } else {
+                input.value = amount;
+            }
+
+            const total = amount * PRICE_PER_ASSET;
+            document.getElementById('assetsTotal').innerText = formatRupiah(total);
+            return total;
+        }
+
+        // Fungsi Memilih Map
+        function selectMap(element, name, price) {
+            if (currentTab !== 'joki') return;
+
+            document.querySelectorAll('.map-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+            currentMap = name;
+            currentPrice = price;
+            
+            // Update tampilan total harga segera setelah map dipilih
+            updateMapTotal();
+        }
+
+        // Fungsi Buka Modal Pembayaran
+        function processOrder() {
+            let isValid = false;
+
+            if (currentTab === 'joki') {
+                if (!currentMap) {
+                    showToast("Harap pilih map terlebih dahulu!", "error");
+                    return;
+                }
+                const qty = parseInt(document.getElementById('mapOrderQty').value) || 1;
+                if (qty < 1) {
+                    showToast("Minimal order 1 kali!", "error");
+                    return;
+                }
+                finalOrderPrice = currentPrice * qty;
+                currentOrderName = `${currentMap} x${qty}`;
+                isValid = true;
+            } 
+            else if (currentTab === 'alloy') {
+                const amount = parseInt(document.getElementById('alloyAmount').value) || 0;
+                if (amount < 1) {
+                    showToast("Minimal order adalah 1M Alloy!", "error");
+                    return;
+                }
+                finalOrderPrice = calculateAlloy();
+                currentOrderName = `Joki ${amount}M Alloy`;
+                isValid = true;
+            }
+            else if (currentTab === 'assets') {
+                const amount = parseInt(document.getElementById('assetsAmount').value) || 0;
+                if (amount < 1) {
+                    showToast("Minimal order adalah 1M Value!", "error");
+                    return;
+                }
+                finalOrderPrice = calculateAssets();
+                currentOrderName = `Joki ${amount}M Value`;
+                isValid = true;
+            }
+
+            if (isValid) {
+                // Tampilkan data di modal
+                document.getElementById('summaryItem').innerText = currentOrderName;
+                document.getElementById('summaryPrice').innerText = formatRupiah(finalOrderPrice);
+
+                // Buat Link WhatsApp Otomatis untuk Notifikasi ke Admin
+                const waMessage = `Halo Admin, saya mau order: ${currentOrderName}\nTotal: ${formatRupiah(finalOrderPrice)}\nMohon diproses ya.`;
+                const waLink = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waMessage)}`;
+                
+                // Set href tombol WA
+                const waBtn = document.getElementById('waConfirmBtn');
+                waBtn.href = waLink;
+                waBtn.style.display = 'flex'; // Tampilkan tombol WA
+
+                // Buka Modal
+                document.getElementById('paymentModal').classList.add('open');
+            }
+        }
+
+        // Tutup Modal
+        function closeModal() {
+            document.getElementById('paymentModal').classList.remove('open');
+        }
+
+        // Simulasi Cek Pembayaran (Opsional, tetap disertakan)
+        function simulateCheck() {
+            const btn = document.getElementById('checkPaymentBtn');
+            const loader = document.getElementById('btnLoader');
+            const text = document.getElementById('btnText');
+
+            btn.disabled = true;
+            loader.style.display = 'block';
+            text.innerText = "Mengecek Pembayaran...";
+
+            setTimeout(() => {
+                document.getElementById('paymentModal').classList.remove('open');
+                document.getElementById('successModal').classList.add('open');
+            }, 2000);
+        }
+
+        // Helper: Format Rupiah
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+        }
+
+        // Helper: Toast Notification
+        function showToast(message, type = "info") {
+            const toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = type === 'error' ? '#c0392b' : '#2c3e50';
+            toast.style.color = 'white';
+            toast.style.padding = '12px 24px';
+            toast.style.borderRadius = '8px';
+            toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+            toast.style.zIndex = '2000';
+            toast.style.fontSize = '0.9rem';
+            toast.innerText = message;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
